@@ -1,19 +1,13 @@
-
-
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
-import {Lesson} from "../model/lesson";
-import {Course} from '../model/course';
-
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { Lesson } from "../model/lesson";
+import { Course } from '../model/course';
 
 @Injectable()
 export class CoursesService {
-
-    constructor(private http:HttpClient) {
-
-    }
+    constructor(private http:HttpClient) { }
 
     findCourseById(courseId: number): Observable<Course> {
         return this.http.get<Course>(`/api/courses/${courseId}`);
@@ -30,10 +24,7 @@ export class CoursesService {
         return this.http.put<Course>(`/api/courses/${courseId}`, changes);
     }
 
-    findLessons(
-        courseId:number, filter = '', sortOrder = 'asc',
-        pageNumber = 0, pageSize = 3):  Observable<Lesson[]> {
-
+    findLessons( courseId:number, filter = '', sortOrder = 'asc', pageNumber = 0, pageSize = 3): Observable<Lesson[]> {
         return this.http.get('/api/lessons', {
             params: new HttpParams()
                 .set('courseId', courseId.toString())
@@ -45,5 +36,4 @@ export class CoursesService {
             map(res =>  res["payload"])
         );
     }
-
 }
