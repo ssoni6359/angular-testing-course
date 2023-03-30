@@ -2,6 +2,8 @@ import { CalculatorService } from "./calculator.service";
 import { TestBed } from "@angular/core/testing"
 import { LoggerService } from "./logger.service";
 
+// xdescribe('CalculatorService', () => {
+// fdescribe('CalculatorService', () => {
 describe('CalculatorService', () => {
     let calculator: CalculatorService, loggerSpy: any;
     beforeEach(() => {
@@ -21,6 +23,8 @@ describe('CalculatorService', () => {
         expect(loggerSpy.log).toHaveBeenCalledTimes(1);
     })
 
+    // xit('should substract two numbers', ()=> {
+    // fit('should substract two numbers', ()=> {
     it('should substract two numbers', ()=> {
         const result = calculator.subtract(2,2);
         expect(result).toBe(0, "unexpected substraction result");
