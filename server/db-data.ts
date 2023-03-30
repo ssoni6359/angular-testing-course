@@ -1,5 +1,4 @@
 export const COURSES: any = {
-
   12: {
     id: 12,
     titles: {
@@ -12,7 +11,6 @@ export const COURSES: any = {
     url: 'angular-testing-course',
     lessonsCount: 10,
   },
-
   2: {
     id: 2,
     titles: {
@@ -25,7 +23,6 @@ export const COURSES: any = {
     seqNo: 1,
     url: 'angular-core-course'
   },
-
   3: {
     id: 3,
     titles: {
@@ -39,7 +36,6 @@ export const COURSES: any = {
     seqNo: 2,
     url: 'rxjs-course'
   },
-
   4: {
     id: 4,
     titles: {
@@ -53,7 +49,6 @@ export const COURSES: any = {
     seqNo: 3,
     url: 'ngrx-course'
   },
-
   1: {
     id: 1,
     titles: {
@@ -66,7 +61,6 @@ export const COURSES: any = {
     seqNo: 4,
     url: 'serverless-angular'
   },
-
   5: {
     id: 5,
     titles: {
@@ -80,7 +74,6 @@ export const COURSES: any = {
     seqNo: 5,
     url: 'angular-for-beginners'
   },
-
   6: {
     id: 6,
     titles: {
@@ -94,7 +87,6 @@ export const COURSES: any = {
     seqNo: 6,
     url: 'angular-security-course'
   },
-
   7: {
     id: 7,
     titles: {
@@ -108,7 +100,6 @@ export const COURSES: any = {
     seqNo: 7,
     url: 'angular-pwa-course'
   },
-
   8: {
     id: 8,
     titles: {
@@ -121,7 +112,6 @@ export const COURSES: any = {
     seqNo: 8,
     url: 'angular-advanced-course'
   },
-
   9: {
     id: 9,
     titles: {
@@ -134,7 +124,6 @@ export const COURSES: any = {
     seqNo: 9,
     url: 'typescript-course'
   },
-
   10: {
     id: 10,
     titles: {
@@ -147,7 +136,6 @@ export const COURSES: any = {
     seqNo: 10,
     url: 'rxjs-patterns-course'
   },
-
   11: {
     id: 11,
     titles: {
@@ -159,7 +147,6 @@ export const COURSES: any = {
     seqNo: 11,
     url: 'angular-material-course'
   }
-
 };
 
 
