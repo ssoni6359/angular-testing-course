@@ -1,14 +1,21 @@
 describe('Home Page', () => {
     it('should display a list of courses', () => {
         // expect(true).to.equal(true);
-        // expect(true).to.equal(false);
+        cy.fixture('courses.json').as("CoursesJSON");
+
+        cy.server();
+        cy.route('/api/courses','@CoursesJSON').as("courses");
 
         cy.visit('/');
         cy.contains("All Courses");
+
+        cy.wait("@courses");
+        cy.get("mat-card").should("have.length", 9);
+
     });
 });
 
+// e2e so real http request
+// Here, we are mocking http response of those request
 
-// npm install cypress --dev
-// run only frontend - currently
-// set baseUrl
+// response in fixture
