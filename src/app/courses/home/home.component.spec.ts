@@ -1,7 +1,6 @@
 import { async, ComponentFixture, fakeAsync, flush, flushMicrotasks, TestBed } from '@angular/core/testing';
 import { CoursesModule } from '../courses.module';
 import { DebugElement } from '@angular/core';
-
 import { HomeComponent } from './home.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { CoursesService } from '../services/courses.service';
@@ -67,6 +66,15 @@ describe('HomeComponent', () => {
   });
 
   it("should display advanced courses when tab clicked", () => {
-    pending();
+    coursesService.findAllCourses.and.returnValue(of(setupCourses()));
+    fixture.detectChanges();
+
+    const tabs = el.queryAll(By.css(".mdc-tab"));
+    click(tabs[1]);
+    // fixture.detectChanges();
+
+    const cardTitles = el.queryAll(By.css(".mat-mdc-card-title"));
+    expect(cardTitles.length).toBeGreaterThan(0, 'Could not find card titles');
+    expect(cardTitles[0].nativeElement.textContent).toContain('Angular Security Course');
   });
 });
