@@ -1,4 +1,4 @@
-import { fakeAsync, flush, tick } from "@angular/core/testing";
+import { fakeAsync, flush, flushMicrotasks, tick } from "@angular/core/testing";
 
 fdescribe('Async Testing Examples', () => {
     
@@ -24,13 +24,12 @@ fdescribe('Async Testing Examples', () => {
         expect(test).toBeTruthy();
     }));
 
-    //Promise-> micro tasks, setTimeout-> Macro task/ Task
-    fit('Asynchronous test example - plain Promise', () => {
+    fit('Asynchronous test example - plain Promise', fakeAsync(() => {
         let test = false;
         console.log('Creating promise');
 
-        setTimeout(()=>{ console.log('setTimeout() first callback triggered'); });
-        setTimeout(()=>{ console.log('setTimeout() second callback triggered'); });
+        // setTimeout(()=>{ console.log('setTimeout() first callback triggered'); });
+        // setTimeout(()=>{ console.log('setTimeout() second callback triggered'); });
 
         Promise.resolve().then(() => {
             console.log('Promise first then() resolved successfully');
@@ -41,15 +40,8 @@ fdescribe('Async Testing Examples', () => {
             test = true;
         });
 
+        flushMicrotasks();
         console.log('running test assertions');
         expect(test).toBeTruthy();
-    });
+    }));
 });
-
-// Promise has priority over setTimeout - [Wrong to say]. Instead, first micro task then macro tasks.
-
-// All those asynchronous macro operations(timeout, ajax, clicks, etc.) will get added to the event loop.
-// And between each of these macro tasks, the browser rendering engine is going to get a chance to update.
-
-// Promises are added to their own queue. Micro tasks are more lightweight & allow our runtime to be more responsive.
-//Therefore, there are two separate queues in the JavaScript runtime for asynchronous tasks.
