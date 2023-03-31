@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, flush, flushMicrotasks, TestBed, tick } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, fakeAsync, flush, flushMicrotasks, TestBed, tick } from '@angular/core/testing';
 import { CoursesModule } from '../courses.module';
 import { DebugElement } from '@angular/core';
 import { HomeComponent } from './home.component';
@@ -21,9 +21,9 @@ describe('HomeComponent', () => {
   const beginnerCourses = setupCourses().filter(course => course.category === 'BEGINNER');
   const advancedCourses = setupCourses().filter(course => course.category === 'ADVANCED');
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
+//  beforeEach(fakeAsync(() => {
     const coursesServiceSpy = jasmine.createSpyObj('CoursesService', ['findAllCourses']);
-
     TestBed.configureTestingModule({
         imports: [
             CoursesModule,
@@ -32,12 +32,14 @@ describe('HomeComponent', () => {
         providers: [
             {provide: CoursesService, useValue: coursesServiceSpy}
         ]
-    }).compileComponents().then( () => {
+    }).compileComponents().then(() => {
         fixture = TestBed.createComponent(HomeComponent);
         component = fixture.componentInstance;
         el = fixture.debugElement;
         coursesService = TestBed.get(CoursesService);
     })
+
+    // flushMicrotasks();
   }));
 
   it("should create the component", () => {
@@ -65,7 +67,7 @@ describe('HomeComponent', () => {
     expect(tabs.length).toBe(2, 'Expected to find 2 Tabs');
   });
 
-  it("should display advanced courses when tab clicked", fakeAsync(() => {
+  it("should display advanced courses when tab clicked - fakeAsync", fakeAsync(() => {
     coursesService.findAllCourses.and.returnValue(of(setupCourses()));
     fixture.detectChanges();
 
@@ -73,11 +75,31 @@ describe('HomeComponent', () => {
     click(tabs[1]);
     fixture.detectChanges();
 
-    // tick(16);
     flush();
-    
     const cardTitles = el.queryAll(By.css(".mat-mdc-tab-body-active .mat-mdc-card-title"));
     expect(cardTitles.length).toBeGreaterThan(0, 'Could not find card titles');
     expect(cardTitles[0].nativeElement.textContent).toContain('Angular Security Course');
   }));
+
+  it("should display advanced courses when tab clicked - async", waitForAsync(() => {
+    coursesService.findAllCourses.and.returnValue(of(setupCourses()));
+    fixture.detectChanges();
+
+    const tabs = el.queryAll(By.css(".mdc-tab"));
+    click(tabs[1]);
+    fixture.detectChanges();
+
+    fixture.whenStable().then(()=> {
+        console.log('Called whenStable()');
+        const cardTitles = el.queryAll(By.css(".mat-mdc-tab-body-active .mat-mdc-card-title"));
+        expect(cardTitles.length).toBeGreaterThan(0, 'Could not find card titles');
+        expect(cardTitles[0].nativeElement.textContent).toContain('Angular Security Course');
+    });
+  }));
 });
+
+// FakeAsync has more control over time. Looks like sync code. - use in Test Case
+// To test a component when has actual http called, we use async not fakeAsync
+// Not recommended to use- faleAsync in beforeEach
+
+// Both are testing async utility so use them wisely.
