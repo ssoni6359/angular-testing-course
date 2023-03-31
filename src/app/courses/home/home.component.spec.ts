@@ -22,7 +22,6 @@ describe('HomeComponent', () => {
   const advancedCourses = setupCourses().filter(course => course.category === 'ADVANCED');
 
   beforeEach(waitForAsync(() => {
-//  beforeEach(fakeAsync(() => {
     const coursesServiceSpy = jasmine.createSpyObj('CoursesService', ['findAllCourses']);
     TestBed.configureTestingModule({
         imports: [
@@ -38,8 +37,6 @@ describe('HomeComponent', () => {
         el = fixture.debugElement;
         coursesService = TestBed.get(CoursesService);
     })
-
-    // flushMicrotasks();
   }));
 
   it("should create the component", () => {
@@ -97,9 +94,3 @@ describe('HomeComponent', () => {
     });
   }));
 });
-
-// FakeAsync has more control over time. Looks like sync code. - use in Test Case
-// To test a component when has actual http called, we use async not fakeAsync
-// Not recommended to use- faleAsync in beforeEach
-
-// Both are testing async utility so use them wisely.
