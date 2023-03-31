@@ -70,11 +70,6 @@ import {CourseResolver} from './services/course.resolver';
         CoursesService,
         CourseResolver
     ]
-})export class CoursesModule {
+})
 
-
-
-}
-
-
-
+export class CoursesModule { }

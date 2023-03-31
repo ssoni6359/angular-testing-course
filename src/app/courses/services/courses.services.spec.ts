@@ -101,7 +101,4 @@ describe('CoursesService', () => {
     afterEach(() => {
         httpTestingController.verify();
     });
-
 })
-
-//predicate req to match
