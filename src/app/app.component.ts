@@ -38,3 +38,19 @@ export class AppComponent {
 //After run: npm run e2e. It generate all reports.
 
 // We have travis.yml file for Travis CI
+
+/*
+Suggestions: 
+1. use inject
+2. Try to write mostly test sync cases. Most of things covered with these only.
+3. When writing asynchronous tests, bear in mind that if something goes wrong, you can always use the Jasmine then 
+   callback for writing asynchronous tests.
+   In order to be able to test the logic that uses a setInterval, we will need to use the Jasmine then callback and 
+   not one of the testing zones.
+4. Cyprus is not angular specific and can be used to test anything that runs in the browser.
+5. In an angular End-To-End test built using Cyprus, the only thing being mocked are the backend responses.Here, we 
+   are not testing one component or service in isolation, but instead we are testing our whole frontend application 
+   as a deployment unit.
+6. At end, it's all about creating one unique command that we can run using and NPM script that is going to start our 
+   development server with the production bundle.
+*/
