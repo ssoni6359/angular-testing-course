@@ -1,21 +1,25 @@
 describe('Home Page', () => {
-    it('should display a list of courses', () => {
-        // expect(true).to.equal(true);
+    beforeEach(()=> {
         cy.fixture('courses.json').as("CoursesJSON");
 
         cy.server();
         cy.route('/api/courses','@CoursesJSON').as("courses");
 
         cy.visit('/');
+    })
+
+    it('should display a list of courses', () => {
         cy.contains("All Courses");
 
         cy.wait("@courses");
         cy.get("mat-card").should("have.length", 9);
+    });
 
+    it('should display the advanced courses', () => {
+        cy.get('.mdc-tab').should("have.length", 2);
+
+        cy.get('.mdc-tab').last().click();
+        cy.get('.mat-mdc-tab-body-active .mat-mdc-card-title').its('length').should('be.gt', 1);
+        cy.get('.mat-mdc-tab-body-active .mat-mdc-card-title').first().should('contain', 'Angular Security Course');
     });
 });
-
-// e2e so real http request
-// Here, we are mocking http response of those request
-
-// response in fixture
