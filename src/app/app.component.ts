@@ -36,3 +36,5 @@ export class AppComponent {
 // After that, give the command to run, and also the url followed by test command ie. cypress:run
 
 //After run: npm run e2e. It generate all reports.
+
+// We have travis.yml file for Travis CI
